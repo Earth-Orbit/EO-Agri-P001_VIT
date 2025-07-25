@@ -1,5 +1,5 @@
 # EO-Agri-P001_VIT
-Downscaling of prisma using Sentinel-2:  
+Downscaling of Prisma Hyperspectral imagery using Sentinel-2 MSI:
 
 This project performs spatial downscaling of PRISMA hyperspectral imagery using Sentinel-2 multispectral imagery as a reference.
 The approach aligns the spatial resolution of PRISMA data to match that of Sentinel-2 (typically 10m or 20m), improving the usability of hyperspectral data for precision agriculture, environmental monitoring, and land cover analysis. The script uses GDAL Warp to resample the PRISMA image spatially, matching the georeferencing, projection, resolution, and extent of the Sentinel-2 image.
