@@ -46,6 +46,28 @@ Steps to Run the Script:
 8. Output will include the confusion matrix, overall accuracy, and detailed precision, recall, and F1-score for each of the classes.
 9. Use these metrics to assess the similarity and quality of downscaling between the PRISMA and Sentinel-2 images.
 
+# Other Downscaling Techniques
+In addition to the primary downscaling workflow, multiple alternative methods were applied to PRISMA hyperspectral imagery using Sentinel-2 as a reference:
+1. Bilinear Resampling
+The PRISMA image was resampled using bilinear interpolation to match the spatial resolution of Sentinel-2, producing a smooth high-resolution output.
+
+2. Nearest Neighbor Resampling
+Nearest Neighbor (NN) resampling was applied to preserve original pixel values while aligning the PRISMA image with Sentinel-2.
+
+3. HySure Fusion (Sparse Regression)
+Fast HySure fusion was applied using Lasso-based sparse regression on a random subset of pixels to estimate high-resolution hyperspectral data.
+
+4. CNMF Fusion (Coupled Non-negative Matrix Factorization)
+NMF decomposition of Sentinel-2 bands was performed to extract key components, which were then used to reconstruct high-resolution hyperspectral data.
+
+5. Bayesian Fusion
+Bayesian fusion combined PRISMA and Sentinel-2 data with a weighted approach, balancing spatial and spectral contributions to generate enhanced resolution outputs.
+
+6. Filter-Based Fusion (PCA + Wavelet)
+PCA was applied to Sentinel-2 bands, the first principal component was replaced with PRISMA information, and wavelet decomposition was used for spatial refinement.
+
+All fused and resampled images were saved as GeoTIFFs and used for subsequent index extraction and LULC classification.
+
 
 # Extraction of Vegetation Indices
 
