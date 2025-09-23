@@ -47,6 +47,65 @@ Steps to Run the Script:
 9. Use these metrics to assess the similarity and quality of downscaling between the PRISMA and Sentinel-2 images.
 
 
+# Extraction of Vegetation Indices
+
+Vegetation indices were derived from both the downscaled PRISMA hyperspectral imagery and the Sentinel-2 multispectral imagery to enhance vegetation characterization and improve classification accuracy. Four indices—NDVI, GNDVI, EVI, and MSAVI—were computed as follows:
+
+1) NDVI (Normalized Difference Vegetation Index):
+NDVI = (NIR − Red) / (NIR + Red)
+Highlights healthy vegetation and overall biomass presence.
+
+2) GNDVI (Green Normalized Difference Vegetation Index):
+GNDVI = (NIR − Green) / (NIR + Green)
+Sensitive to chlorophyll concentration and canopy stress.
+
+3) EVI (Enhanced Vegetation Index):
+EVI = 2.5 × (NIR − Red) / (NIR + 6 × Red − 7.5 × Blue + 1)
+Reduces atmospheric and soil background influences, particularly in dense vegetation areas.
+
+4) MSAVI (Modified Soil-Adjusted Vegetation Index):
+MSAVI = (2 × NIR + 1 − √((2 × NIR + 1)² − 8 × (NIR − Red))) / 2
+Minimizes soil influence, improving vegetation detection in sparse cover regions.
+
+From these indices, training CSV files were prepared for both Sentinel-2 and PRISMA datasets by extracting spectral values and assigning land cover labels. The classes considered were:
+1. Waterbody
+2. Settlement
+3. Barren Land
+4. Moderate Vegetation
+5. Stressed Vegetation
+6. Healthy Vegetation
 
 
+# Land Use / Land Cover Classification using Machine Learning Models
+Models Used
+1. Random Forest (RF):
+Ensemble learning method combining multiple decision trees.
+Robust against overfitting and effective for high-dimensional data.
+Used as a baseline classifier due to its reliability in remote sensing applications.
+
+2. Support Vector Machine (SVM):
+Kernel-based classifier effective in handling non-linear boundaries.
+Radial Basis Function (RBF) kernel applied for separating complex vegetation classes.
+Scaled features before training to improve performance.
+
+3. K-Nearest Neighbors (KNN):
+Instance-based learning method.
+Classified unknown samples by majority voting among nearest neighbors.
+Weighted distance used to reduce noise effects.
+
+4. Logistic Regression (LR):
+Multinomial logistic regression model applied for multi-class classification.
+Useful for probability-based classification and interpretability.
+
+Evaluation: 
+For each model:
+Training and testing datasets were generated using stratified 80:20 split.
+Performance was assessed using:
+1. Overall Accuracy
+2. Confusion Matrix
+3. Precision, Recall, and F1-Score per class
+Results were compiled into Word reports containing metrics, class mapping, and confusion matrices for each classifier.
+
+Raster Classification: 
+After evaluation, each trained model was applied to the input vegetation index rasters (e.g., NDVI) to generate spatially continuous LULC maps. The classification outputs were saved as compressed GeoTIFFs with class codes aligned to the defined LULC categories.
 
